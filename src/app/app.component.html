@@ -1,5 +1,9 @@
 <div class="alert alert-danger" role="alert">
   A simple primary alert—check it out!
 </div>
-
-<p [style]="textString">123</p>
+<button class="btn btn-primary" (click)="showModal = true">show modal</button>
+<app-dialog
+  [show]="showModal"
+  title="一个标题"
+  (close)="onClose()">
+</app-dialog>

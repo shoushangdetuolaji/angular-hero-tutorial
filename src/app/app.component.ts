@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hero';
-  textString = {width: '100px', height: '100px'}
+  showModal = false;
+  onClose() {
+    this.showModal = false;
+  }
 }
