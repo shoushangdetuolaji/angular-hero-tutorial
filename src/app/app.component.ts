@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, NgModule, ViewChild, OnInit} from '@angular/core';
+import {NgModel} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,18 @@ export class AppComponent {
   inFormVal = '';
   expandVal = '';
   inputVal = '';
+  name: string | null = '';
   onClose() {
     this.showModal = false;
   }
   onConfirm() {
     this.showModal = false;
+  }
+  constructor() {
+
+  }
+  ngOnInit():void {
+    const heroName: string = this.name!;
   }
 
 }

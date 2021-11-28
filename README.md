@@ -148,3 +148,63 @@ export class SimpleNgModelComp {
 </form>
 ```
 
+
+
+一些补充可以看文档:
+
+> https://angular.cn/api/forms/NgModel#instance-properties
+
+
+
+### 指令
+
+- 属性型指令
+- 结构性指令(带*号的)
+
+
+
+### 模板引用变量 #var
+
+#phone
+
+ref-phone 两种写法是一样的 相当于vue的refs=""
+
+获取实例
+
+
+
+### 模板运算符
+
+安全导航运算符(?)和空属性路径
+
+#### 可选链? ---> es2020定义
+
+a?.b?.c?.d
+
+a && a.b && a.b.c && a.b.c.d
+
+```
+<p>The item name is : {{item?.name}} </p>
+```
+
+
+
+#### 非空断言(!)
+
+> 在ts中，开启--strictNullChecks后，将一个可能是undefined或null的变量赋给一个有确切类型的变量时，会报错
+
+但在特定情况下，我们很确定那个变量一定不是undefined或null，这个时候就可以用非空断言操作符，用了这个操作符的变量，可以理解为ts不要去操心了，我这个变量一定是有值的，非空断言生效的前提是开启 --strictNullCheck使用非空断言的两个步骤:
+
+- tsconfig.json中设置"strictNullChecks": true, 
+- tslint.json中设置"no-non-null-assertion": false
+
+```ts
+ngOnInit(): void {
+    const hereName: string = this.name!;
+    // 以上写法相当于
+	if (this.name) {
+        const heroName: string = this.name;
+    }
+}
+```
+
