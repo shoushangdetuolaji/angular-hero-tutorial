@@ -128,7 +128,7 @@ export class SimpleNgModelComp {
 
 <input [(ngModel)]="name" /> 上面这行代码相当于： <input [value]="name" (input)="name = $event.target.value" />
 
-#### 在表单中使用
+#### 在form表单中使用
 
 > 表单中使用[(ngModel)]，需要做下面两件事其中之一：
 
