@@ -9,6 +9,9 @@ export class AppComponent {
   title = 'hero';
   showModal = false;
   size = 16;
+  inFormVal = '';
+  expandVal = '';
+  inputVal = '';
   onClose() {
     this.showModal = false;
   }

@@ -98,6 +98,8 @@ Ng内置绑定 -- NgClass
 
 ### 表单的双向绑定
 
+app.module.ts要引入FormsModule
+
 [(ngModel)] 一个指令 
 
 1. 名为ngModel的输入属性
@@ -131,6 +133,8 @@ export class SimpleNgModelComp {
 #### 在form表单中使用
 
 > 表单中使用[(ngModel)]，需要做下面两件事其中之一：
+>
+> https://angular.cn/api/forms/NgModel#using-a-standalone-ngmodel-within-a-group
 
 - 给控件加上name属性
 - 将ngModelOptions.standalone设为true

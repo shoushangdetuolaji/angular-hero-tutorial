@@ -13,3 +13,15 @@
 <p>
   <label [style.fontSize.px]="size">FontSize: {{ size }}px</label>
 </p>
+
+<p>inputVal is {{ inputVal }}</p>
+
+<h2>在表单中使用ngModel</h2>
+<form>
+  <input type="text" [(ngModel)]="inFormVal" [ngModelOptions]="{ standalone: true }" />
+  <p>inFormVal is {{ inFormVal }}</p>
+</form>
+
+<h2>表单双向绑定</h2>
+<input type="text" [ngModel]="expandVal" (ngModelChange)="expandVal = $event"/>
+<p>expandVal is {{ expandVal }}</p>
