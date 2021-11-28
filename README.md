@@ -72,5 +72,75 @@ Ng内置绑定 -- NgClass
 
 
 
+### 输入和输出属性
 
+> https://angular.cn/guide/inputs-outputs
+
+
+
+### 基本双向绑定
+
+> https://angular.cn/guide/two-way-binding
+
+
+
+```html
+<!-- <app-sizer [size]="size" (change)="size = $event"></app-sizer> -->
+<app-sizer [(size)]="size"></app-sizer>
+<p>
+  <label [style.fontSize.px]="size">FontSize: {{ size }}px</label>
+</p>
+```
+
+效果一样的，下面的写法更精简
+
+
+
+### 表单的双向绑定
+
+[(ngModel)] 一个指令 
+
+1. 名为ngModel的输入属性
+2. 名为ngModelChange的输出属性
+
+```ts
+import {Component} from '@angular/core';
+
+@Component({
+  selector: 'example-app',
+  template: `
+    <input [(ngModel)]="name" #ctrl="ngModel" required>
+    
+    <p>Value: {{ name }}</p>
+    <p>Valid: {{ ctrl.valid }}</p>
+    
+    <button (click)="setValue()">Set value</button>
+  `,
+})
+export class SimpleNgModelComp {
+  name: string = '';
+
+  setValue() {
+    this.name = 'Nancy';
+  }
+}
+```
+
+<input [(ngModel)]="name" /> 上面这行代码相当于： <input [value]="name" (input)="name = $event.target.value" />
+
+#### 在表单中使用
+
+> 表单中使用[(ngModel)]，需要做下面两件事其中之一：
+
+- 给控件加上name属性
+- 将ngModelOptions.standalone设为true
+
+```html
+<form>
+  <form>
+    <input [(ngModel)]="value" name="name" />
+    <input [(ngModel)]="value" [ngModelOptions]="{ standalone: true }" />
+  </form>
+</form>
+```
 

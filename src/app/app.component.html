@@ -5,5 +5,11 @@
 <app-dialog
   [show]="showModal"
   title="一个标题"
-  (close)="onClose()">
+  (confirm)="onConfirm()"
+  (close)="onClose()"
+  (backdropClick)="onClose()">
 </app-dialog>
+<app-sizer [size]="size" (change)="size = $event"></app-sizer>
+<p>
+  <label [style.fontSize.px]="size">FontSize: {{ size }}px</label>
+</p>

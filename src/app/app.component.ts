@@ -8,7 +8,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'hero';
   showModal = false;
+  size = 16;
   onClose() {
     this.showModal = false;
   }
+  onConfirm() {
+    this.showModal = false;
+  }
+
 }

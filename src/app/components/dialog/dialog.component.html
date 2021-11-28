@@ -1,4 +1,4 @@
-<div class="modal fade show black-back" [class.d-block]="show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade show black-back" (click)="backdropClick.emit()" [class.d-block]="show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -12,7 +12,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">{{ cancelLabel}}</button>
-        <button type="button" class="btn btn-primary">{{ confirmLabel }}</button>
+        <button type="button" class="btn btn-primary" (click)="onConfirm()">{{ confirmLabel }}</button>
       </div>
     </div>
   </div>
