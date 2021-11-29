@@ -1,5 +1,6 @@
 import {Component, NgModule, ViewChild, OnInit} from '@angular/core';
 import {NgModel} from "@angular/forms";
+import {TransferItem} from "./components/transfer-panel/types";
 
 @Component({
   selector: 'app-root',
@@ -7,24 +8,27 @@ import {NgModel} from "@angular/forms";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'hero';
-  showModal = false;
-  size = 16;
-  inFormVal = '';
-  expandVal = '';
-  inputVal = '';
-  name: string | null = '';
-  onClose() {
-    this.showModal = false;
-  }
-  onConfirm() {
-    this.showModal = false;
-  }
+  list: TransferItem[] = [];
   constructor() {
 
   }
   ngOnInit():void {
-    const heroName: string = this.name!;
+   this.setList()
+  }
+  private setList() {
+    this.list = [];
+    const prefix = 'item' + Date.now().toString().slice(-3);
+    console.log(prefix)
+    for (let i = 0; i < 20; i++) {
+      this.list.push({
+        key: prefix + '_' + i,
+        value: `${prefix}${i + 1}`,
+        checked: i % 6 === 0
+      });
+    }
+  }
+  onChanged(selecteds: TransferItem[]) {
+    console.log('selecteds', selecteds);
   }
 
 }

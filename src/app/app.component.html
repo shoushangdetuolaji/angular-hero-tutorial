@@ -1,31 +1,5 @@
-<div class="alert alert-danger" role="alert">
-  A simple primary alert—check it out!
+<div class="demo-sec">
+  <div class="panel">
+    <app-transfer-panel [search]="true" [list]="list" (changed)="onChanged($event)"></app-transfer-panel>
+  </div>
 </div>
-<button class="btn btn-primary" (click)="showModal = true">show modal</button>
-<app-dialog
-  [show]="showModal"
-  title="一个标题"
-  (confirm)="onConfirm()"
-  (close)="onClose()"
-  (backdropClick)="onClose()">
-</app-dialog>
-<app-sizer [size]="size" (change)="size = $event"></app-sizer>
-<p>
-  <label [style.fontSize.px]="size">FontSize: {{ size }}px</label>
-</p>
-
-
-<input type="text" [(ngModel)]="inputVal" disabled>
-<p>inputVal is {{ inputVal }}</p>
-
-<h2>在表单中使用ngModel</h2>
-<form>
-  <input type="text" [(ngModel)]="inFormVal" [ngModelOptions]="{ standalone: true }" />
-  <p>inFormVal is {{ inFormVal }}</p>
-</form>
-
-<h2>表单双向绑定</h2>
-<input type="text" [ngModel]="expandVal" (ngModelChange)="expandVal = $event"/>
-<p>expandVal is {{ expandVal }}</p>
-
-
