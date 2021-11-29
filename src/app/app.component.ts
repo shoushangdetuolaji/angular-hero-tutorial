@@ -1,6 +1,6 @@
 import {Component, NgModule, ViewChild, OnInit} from '@angular/core';
 import {NgModel} from "@angular/forms";
-import {TransferItem} from "./components/transfer-panel/types";
+import {TransferItem} from "./demos/components/transfer-panel/types";
 
 @Component({
   selector: 'app-root',
