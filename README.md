@@ -208,3 +208,49 @@ ngOnInit(): void {
 }
 ```
 
+
+
+### 属性型指令
+
+> https://angular.cn/guide/attribute-directives
+
+创建指令
+
+`ng g d <name> --skipTests`
+
+参考官网例子
+
+
+
+### 结构型指令
+
+> https://angular.cn/guide/structural-directives
+
+
+
+### TemplateRef和ViewContainerRef
+
+> 一般在ts文件中的
+
+- https://angular.cn/api/core/EmbeddedViewRef
+- https://angular.cn/api/core/TemplateRef
+- https://angular.cn/api/core/ViewContainerRef
+
+
+
+ViewContainerRef
+
+表示可以将一个或多个视图附着到组件中的容器。
+
+EmbeddedVieRef
+
+表示视图容器中的 Angular [视图](https://angular.cn/guide/glossary#view)。[嵌入视图](https://angular.cn/guide/glossary#view-tree)可以从在模板中定义它的宿主组件之外的组件中引用，也可以由 `TemplateRef` 进行独立定义。
+
+TemplateRef
+
+表示一个内嵌模板，它可用于实例化内嵌的视图。 要想根据模板实例化内嵌的视图，请使用 `ViewContainerRef` 的 `createEmbeddedView()` 方法。
+
+用法可查看:
+
+> https://gitee.com/Madom/ng10-course/blob/master/hero(%E5%89%8D9%E7%AB%A0%E6%BA%90%E7%A0%81)/notes/1.%E7%BB%84%E4%BB%B6%E4%B8%8E%E6%A8%A1%E7%89%88/TemplateRef%E5%92%8CViewContainerRef.md
+
