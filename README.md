@@ -254,3 +254,58 @@ TemplateRef
 
 > https://gitee.com/Madom/ng10-course/blob/master/hero(%E5%89%8D9%E7%AB%A0%E6%BA%90%E7%A0%81)/notes/1.%E7%BB%84%E4%BB%B6%E4%B8%8E%E6%A8%A1%E7%89%88/TemplateRef%E5%92%8CViewContainerRef.md
 
+
+
+### NgTemplateOutlet指令
+
+> 根据一个提前准备好的templateRef插入一个内嵌式图
+
+> https://angular.cn/api/common/NgTemplateOutlet#description
+
+
+
+### 组件投影
+
+> 相当于组件中的slot插槽？
+
+```TS
+import { Component, Input, TemplateRef } from '@angular/core';
+@Component({
+  selector: 'app-shadow',
+  template: `
+            <div class="shadow">
+              <div class="head">
+                <ng-content select=".head"></ng-content>
+              </div>
+              <div class="body">
+                <ng-content select="[attr]"></ng-content>
+                <ng-content select="article"></ng-content>
+                <ng-content></ng-content>
+              </div>
+              <div class="foot">
+                <ng-content select=".foot"></ng-content>
+              </div>
+            </div>`
+})
+export class ShadowComponent  {}
+```
+
+调用ShadowComponent:
+
+```ts
+import { Component, Input } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  template: `
+            <app-shadow [visible]="true">
+              <div class="head">这是head的投影</div>
+              <div attr>这是attr的投影内容</div>
+              <article>这是article的投影内容</article>
+              <b style="color: #007bff">这是默认的投影内容</b>
+              <div class="foot">这是foot的投影</div>
+            </app-shadow>
+          `
+})
+export class AppComponent  {}
+```
+
