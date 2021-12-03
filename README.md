@@ -357,7 +357,7 @@ export class ViewChildComponent implements OnInit, AfterViewInit {
 
 **上面例子中的boxEl，默认在变更检测之后才会获取到元素，而ngAfterViewInit就是在变更检测之后才会调用**
 
-### static属性
+##### static属性
 
 > 默认在变更检测之后才会获取到目标元素，可开启static，这样组件初始化到时候，变更检测前就能获取到目标
 
@@ -381,7 +381,7 @@ export class ViewChildComponent implements OnInit, AfterViewInit {
 **可以看到在constructor里是拿不到模板元素的，建议如果目标从一开始就显示在模版上**
 **即没有被ngIf等指令操控，就开启static**
 
-###  获取子组件（指令）
+##### 获取子组件（指令）
 
 > 以组件为例，获取到组件实例后可以访问子组件到属性和方法，指令用法和组件一摸一样
 
@@ -496,4 +496,114 @@ export class ViewChildComponent implements OnInit, AfterViewInit {
     }
 }
 ```
+
+
+
+### ContentChild和ContentChildren
+
+> https://angular.cn/api/core/ContentChild
+>
+> https://angular.cn/api/core/ContentChildren
+
+用法类似ViewChild，获取投影中到组件或指令还有元素dom等
+
+#### 获取投影中单组件
+
+```TS
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+
+@Component({
+  selector: 'app-content-child-panel',
+  templateUrl: './content-child-panel.component.html'
+})
+export class ContentChildPanelComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {}
+
+  alert() {
+    alert('aa');
+  }
+}
+
+@Component({
+  selector: 'app-content-child',
+  template: `
+      <div class="content-child-box">
+        <h2>这是content child组件</h2>
+        <div class="head" style="border: 1px solid; margin: 10px 0;">
+          <ng-content select=".head"></ng-content>
+        </div>
+        <ng-content></ng-content>
+      </div>
+ `,
+  styles: []
+})
+export class ContentChildComponent implements AfterViewInit {
+  // 无法获取dom元素
+  // @ContentChild('.head', { static: true }) private headEl: ElementRef;
+  // @ContentChild('list', { static: true }) private listEl: ElementRef;
+  @ContentChild(ContentChildPanelComponent, { static: true }) private panel: ContentChildPanelComponent;
+  constructor() { }
+
+  ngAfterViewInit(): void {
+    this.panel.alert();
+  }
+
+}
+```
+
+调用ContentChildComponent：
+
+```
+<app-content-child>
+  <div class="head">
+    这是头部
+  </div>
+  <app-content-child-panel></app-content-child-panel>
+  <ul #list>
+    <li>aaa</li>
+    <li>bbb</li>
+  </ul>
+</app-content-child>
+```
+
+#### ContentChildren
+
+> 用法类似ViewChildren，批量获取投影中到组件或指令
+
+```
+<app-content-child>
+  <div class="head">
+    这是头部
+  <app-content-child-panel></app-content-child-panel>
+  </div>
+  <app-content-child-panel></app-content-child-panel>
+  <app-content-child-panel></app-content-child-panel>
+  <ul #list>
+    <li>aaa</li>
+    <li>bbb</li>
+  </ul>
+</app-content-child>
+export class ContentChildComponent implements AfterViewInit {
+  @ContentChildren(ContentChildPanelComponent) private panels: QueryList<ContentChildPanelComponent>;
+  constructor() { }
+
+  ngAfterViewInit(): void {
+    console.log(this.panels); // 只有两个结果
+  }
+
+}
+```
+
+
+
+#### descendants属性
+
+> 是ContentChildren特有但属性，上个例子少拿类一个panel组件，原因是默认只寻找直属子panel 而.head里但panel组件，并非直属，所以拿不到，想要寻找到所有层级的panel组件，就开启descendants
+
+**@ContentChildren(ContentChildPanelComponent, { descendants: true }) private panels: QueryList;**
+
+
 
