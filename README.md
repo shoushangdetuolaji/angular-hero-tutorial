@@ -607,3 +607,61 @@ export class ContentChildComponent implements AfterViewInit {
 
 
 
+### 管道
+
+> https://angular.cn/guide/pipes#transforming-data-using-pipes
+
+
+
+### 生命周期
+
+> 组件和指令 但是指令没全的
+
+
+
+### 变更检测
+
+> 叼这个很难说，用的时候就2行代码给搞定，忘记了再看文档吧。
+
+
+
+### 组件样式
+
+#### 宿主选择器
+
+> :host 选择是是把宿主元素作为目标的唯一方式
+
+它选中的是组件模板标签，比如，相当于在父组件的style中选择 app-user {}
+
+当宿主标签上有 active class时生效
+
+```
+:host(.active) {
+  border-width: 3px;
+}
+```
+
+#### 祖先选择器
+
+当某个祖先元素有 CSS 类 theme-light 时，才会把 background-color 样式应用到组件内部的所有 .title 元素中
+找到根元素(html标签)为止
+
+```
+:host-context(.theme-light) .title {
+  background-color: #95f04c;
+}
+```
+
+
+
+#### 样式模块化
+
+- 在 @Component 的元数据中指定的样式只会对该组件的模板生效
+- 组件的样式不会影响到子组件中的模板
+- 组件的样式不会影响到投影内容
+
+#### 视图封装模式
+
+- ShadowDom -- 不进不出，没有样式能进来，组件样式出不去, 就自己玩
+- Emulated -- 默认选项，只进不出，全局样式能进来，组件样式出不去
+- None -- 能进能出，此时组件的样式是全局生效的，注意与其他组件发生样式冲突
