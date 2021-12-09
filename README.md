@@ -668,6 +668,14 @@ export class ContentChildComponent implements AfterViewInit {
 
 
 
+### 动态组件
+
+> https://angular.cn/guide/dynamic-component-loader
+
+这是官网的一个生动的例子，看云师兄的模板也行(理解不了的话
+
+> https://gitee.com/Madom/ng10-course/blob/master/hero(%E5%89%8D9%E7%AB%A0%E6%BA%90%E7%A0%81)/notes/1.%E7%BB%84%E4%BB%B6%E4%B8%8E%E6%A8%A1%E7%89%88/%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6.md
+
 
 
 

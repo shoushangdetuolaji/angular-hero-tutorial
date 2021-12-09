@@ -8,6 +8,7 @@ import { SizerComponent } from './demos/components/sizer/sizer.component';
 import {FormsModule} from "@angular/forms";
 import {TransferPanelComponent} from './demos/components/transfer/transfer-panel/transfer-panel.component';
 import { TransferComponent } from './demos/components/transfer/transfer.component';
+import { AlertComponent } from './demos/components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TransferComponent } from './demos/components/transfer/transfer.componen
     DialogComponent,
     SizerComponent,
     TransferPanelComponent,
-    TransferComponent
+    TransferComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

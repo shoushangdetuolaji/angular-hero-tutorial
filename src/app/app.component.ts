@@ -1,5 +1,10 @@
-import {Component, NgModule, ViewChild, OnInit} from '@angular/core';
-import {NgModel} from "@angular/forms";
+import {
+  Component,
+  NgModule,
+  ViewChild,
+  OnInit
+} from '@angular/core';
+
 import {TransferItem} from "./demos/components/transfer/types";
 
 @Component({
@@ -9,7 +14,8 @@ import {TransferItem} from "./demos/components/transfer/types";
 })
 export class AppComponent {
   list: TransferItem[] = [];
-  constructor() {
+  constructor(
+  ) {
 
   }
   ngOnInit():void {
