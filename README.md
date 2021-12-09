@@ -665,3 +665,21 @@ export class ContentChildComponent implements AfterViewInit {
 - ShadowDom -- 不进不出，没有样式能进来，组件样式出不去, 就自己玩
 - Emulated -- 默认选项，只进不出，全局样式能进来，组件样式出不去
 - None -- 能进能出，此时组件的样式是全局生效的，注意与其他组件发生样式冲突
+
+
+
+
+
+
+
+### 一些配置问题
+
+- SOLUTION - Error TS2564: Property has no initializer and is not definitely assigned in constructor
+
+  - tsconfig.json->compilerOptions ->
+
+    ```
+    "noImplicitReturns": false,
+    "strictPropertyInitialization": false,
+    ```
+
