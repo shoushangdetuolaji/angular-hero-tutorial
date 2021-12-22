@@ -2,10 +2,12 @@ import {
   Component,
   NgModule,
   ViewChild,
-  OnInit
+  OnInit, ComponentRef, ComponentFactory, ComponentFactoryResolver, Injector, ApplicationRef, EmbeddedViewRef
 } from '@angular/core';
 
 import {TransferItem} from "./demos/components/transfer/types";
+import { fromEvent } from 'rxjs';
+import {scan, throttleTime} from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -15,26 +17,24 @@ import {TransferItem} from "./demos/components/transfer/types";
 export class AppComponent {
   list: TransferItem[] = [];
   constructor(
-  ) {
+  ) {}
+  ngOnInit(): void {
+    // let count = 0;
+    // const rate = 1000;
+    // let lastClick = Date.now() - rate;
+    // document.addEventListener('click', () => {
+    //   if (Date.now() - lastClick >= rate) {
+    //     console.log(`Click ${++count} times`);
+    //     lastClick = Date.now();
+    //   }
+    // });
+    fromEvent(document, 'click')
+      .pipe(
+        throttleTime(1000),
+        scan(count => count + 1, 0)
+      )
+      .subscribe(count => console.log(`Click ${count} times`));
+
 
   }
-  ngOnInit():void {
-   this.setList()
-  }
-  private setList() {
-    this.list = [];
-    const prefix = 'item' + Date.now().toString().slice(-3);
-    console.log(prefix)
-    for (let i = 0; i < 20; i++) {
-      this.list.push({
-        key: prefix + '_' + i,
-        value: `${prefix}${i + 1}`,
-        checked: i % 6 === 0
-      });
-    }
-  }
-  onChanged(selecteds: TransferItem[]) {
-    console.log('selecteds', selecteds);
-  }
-
 }

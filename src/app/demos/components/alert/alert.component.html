@@ -1,4 +1,4 @@
 <div [class]="wrapClis" role="alert">
   <span class="content">{{ options.content }}</span>
-  <i class="close">&times;</i>
+  <i class="close" (click)="closed.emit()">&times;</i>
 </div>

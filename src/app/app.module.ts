@@ -19,6 +19,7 @@ import { AlertComponent } from './demos/components/alert/alert.component';
     TransferComponent,
     AlertComponent
   ],
+  entryComponents: [AlertComponent],
   imports: [
     BrowserModule,
     FormsModule,

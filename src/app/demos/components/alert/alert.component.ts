@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
 
 type AlertTheme = 'primary' | 'warning' | 'danger';
 export interface AlertOption {
@@ -28,13 +28,19 @@ export class AlertComponent implements OnInit {
     content: '',
     theme: 'primary'
   }
+  @Output() readonly closed = new EventEmitter<void>();
   constructor() { }
 
   ngOnInit(): void {
   }
 
   get wrapClis(): string {
-    return `alert alert-primary fixed-top`;
+    return `alert alert-${this.options.theme} fixed-top`;
+  }
+
+  setOptions(options: AlertOption) {
+    console.log('options', options);
+    this.options = {...this.options, ...options};
   }
 
 }
