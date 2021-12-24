@@ -12,16 +12,15 @@ import {
   fromEvent,
   Observable,
   of,
-  map,
   interval,
   timer,
   iif,
   combineLatest,
   range,
   concat,
-  forkJoin, merge, partition, race, mapTo, zip
+  forkJoin, merge, partition, race, mapTo, zip, startWith, endWith, withLatestFrom, bufferCount, bufferWhen, concatMap
 } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, map, concatAll, mergeAll, pluck, buffer, bufferTime, bufferToggle } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -113,12 +112,89 @@ export class AppComponent {
     //
     // race(obs1, obs2, obs3).subscribe(winner => console.log(winner));
 
-    const age$ = of(27, 25, 29);
-    const name$ = of('Foo', 'Bar', 'Beer');
-    const isDev$ = of(true, true, false);
+    // const age$ = of(27, 25, 29);
+    // const name$ = of('Foo', 'Bar', 'Beer');
+    // const isDev$ = of(true, true, false);
+    //
+    // zip(age$, name$, isDev$).subscribe(x => console.log(x));
 
-    zip(age$, name$, isDev$).subscribe(x => console.log(x));
+    // const clicks = fromEvent(document, 'click');
+    // const higherOrder = clicks.pipe(
+    //   map(ev => interval(1000).pipe(take(4))),
+    // );
+    // const firstOrder = higherOrder.pipe(concatAll());
+    // firstOrder.subscribe(x => console.log(x));
 
+    // const clicks = fromEvent(document, 'click');
+    // const higherOrder = clicks.pipe(map((ev) => interval(1000)));
+    // const firstOrder = higherOrder.pipe(mergeAll());
+    // firstOrder.subscribe(x => console.log(x));
+
+    // of('from source')
+    //   .pipe(
+    //     startWith('first', 'second'),
+    //     endWith('end')
+    //   )
+    //   .subscribe(x => console.log(x));
+
+    // const clicks = fromEvent(document, 'click')
+    //   .pipe(pluck('clientX'));
+    // const interval$ = interval(1000);
+    // const result = clicks.pipe(withLatestFrom(interval$));
+    // // const result = interval$.pipe(withLatestFrom(clicks));
+    // result.subscribe(x => console.log(x));
+
+    // const clicks = fromEvent(document, 'click');
+    // console.log(clicks);
+    // const tagNames = clicks.pipe(pluck('target', 'tagName'));
+    // tagNames.subscribe(x => console.log(x));
+
+    // const clicks = fromEvent(document, 'click');
+    // const intervalEvents = interval(1000);
+    // const buffered = intervalEvents.pipe(buffer(clicks));
+    // buffered.subscribe(x => console.log(x));
+
+    // const clicks = fromEvent(document, 'click');
+    // const buffered = clicks.pipe(bufferCount(3));
+    // buffered.subscribe(x => console.log(x));
+
+//     const clicks = fromEvent(document, 'click').pipe(pluck('clientX'));
+// // 只要收集到3个值，就将值推送出去，并且下一轮收集会从上一轮指定索引的位置开始复用
+//     const buffered = clicks.pipe(bufferCount(3, 1));
+//     buffered.subscribe(x => console.log(x));
+
+    // const clicks = fromEvent(document, 'click');
+    // const buffered = clicks.pipe(bufferTime(1000));
+    // buffered.subscribe(x => console.log(x));
+
+    // const sourceInterval = interval(1000);
+    // const startInterval = interval(5000);
+    // const closingInterval = (val: any) => {
+    //   console.log(`${val} 开始缓冲! 3秒后关闭`);
+    //   return interval(3000);
+    // }
+    // // 每5秒会开启一个新的缓冲区以收集发出的值，3秒后发出缓冲的值，并关闭当前缓冲区
+    // const bufferToggleInterval = sourceInterval.pipe(
+    //   bufferToggle(
+    //     startInterval,
+    //     closingInterval
+    //   )
+    // );
+    // const subscribe = bufferToggleInterval.subscribe(val =>
+    //   console.log('Emitted Buffer:', val)
+    // );
+
+    // const oneSecondInterval = interval(1000);
+    // const clicks = fromEvent(document, 'click');
+    // const bufferWhenExample = oneSecondInterval.pipe(bufferWhen(() => clicks));
+    // const subscribe = bufferWhenExample.subscribe(val => console.log('Emitted Buffer: ', val));
+
+    const source = of(10, 100);
+    const example = source.pipe(concatMap(val => of(val * 2)));
+    const subscribe = example.subscribe(val =>
+      console.log('Example w/ Promise:', val)
+    );
+    console.log(example)
   }
 
 }
