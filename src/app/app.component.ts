@@ -18,9 +18,20 @@ import {
   combineLatest,
   range,
   concat,
-  forkJoin, merge, partition, race, mapTo, zip, startWith, endWith, withLatestFrom, bufferCount, bufferWhen, concatMap
+  forkJoin,
+  merge,
+  partition,
+  race,
+  mapTo,
+  zip,
+  startWith,
+  endWith,
+  withLatestFrom,
+  bufferCount,
+  bufferWhen,
+  concatMap
 } from 'rxjs';
-import { take, map, concatAll, mergeAll, pluck, buffer, bufferTime, bufferToggle } from 'rxjs/operators';
+import { take, map, concatAll, mergeAll, pluck, buffer, bufferTime, bufferToggle, concatMapTo, exhaust } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -189,12 +200,23 @@ export class AppComponent {
     // const bufferWhenExample = oneSecondInterval.pipe(bufferWhen(() => clicks));
     // const subscribe = bufferWhenExample.subscribe(val => console.log('Emitted Buffer: ', val));
 
-    const source = of(10, 100);
-    const example = source.pipe(concatMap(val => of(val * 2)));
-    const subscribe = example.subscribe(val =>
-      console.log('Example w/ Promise:', val)
+    // const source = of(10, 100);
+    // const example = source.pipe(concatMap(val => of(val * 2)));
+    // const subscribe = example.subscribe(val =>
+    //   console.log('Example w/ Promise:', val)
+    // );
+    // console.log(example)
+
+    // const source = of(10, 100);
+    // const example = source.pipe(concatMapTo(of('abc')));
+    // const subscribe = example.subscribe(val =>  console.log('Example w/ Promise:', val));
+
+    const clicks = fromEvent(document, 'click');
+    const higherOrder = clicks.pipe(
+      map((ev) => interval(1000).pipe(take(5))),
     );
-    console.log(example)
+    const result = higherOrder.pipe(exhaust());
+    result.subscribe(x => console.log(x));
   }
 
 }
